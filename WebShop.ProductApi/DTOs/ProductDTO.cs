@@ -18,17 +18,16 @@ public class ProductDTO
 
     [Required(ErrorMessage = "Description is required")]
     [MinLength(3)]
-    [MaxLength(255)]
+    [MaxLength(200)]
     public string? Description { get; set; }
 
     [Required(ErrorMessage = "Inventory is required")]
-    [Range(0, 9999)]
+    [Range(1, 9999)]
     public long Inventory { get; set; }
 
-    [Required(ErrorMessage = "Image URL is required")]
-    [MinLength(3)]
-    [MaxLength(255)]
     public string? ImageURL { get; set; }
+
+    public string? CategoryName { get; set; }
 
     [JsonIgnore]
     public Category? Category { get; set; }

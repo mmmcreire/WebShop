@@ -14,10 +14,10 @@ public class ProductRepository : IProductRepository
     }
 
     public async Task<IEnumerable<Product>> GetAll() =>
-        await _context.Products.ToListAsync();
+        await _context.Products.Include(c => c.Category).ToListAsync();
 
     public async Task<Product> GetById(int id) =>
-        await _context.Products.Where(x => x.Id == id).FirstOrDefaultAsync();
+        await _context.Products.Include(c => c.Category).Where(x => x.Id == id).FirstOrDefaultAsync();
 
     public async Task<Product> Create(Product product)
     {

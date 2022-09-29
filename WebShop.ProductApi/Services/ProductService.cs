@@ -7,13 +7,13 @@ namespace WebShop.ProductApi.Services;
 
 public class ProductService : IProductService
 {
-    private readonly IProductRepository _productRepository;
     private readonly IMapper _mapper;
+    private IProductRepository _productRepository;
 
-    public ProductService(IProductRepository productRepository, IMapper mapper)
+    public ProductService(IMapper mapper, IProductRepository productRepository)
     {
-        _productRepository = productRepository;
         _mapper = mapper;
+        _productRepository = productRepository;
     }
 
     public async Task<IEnumerable<ProductDTO>> GetProducts()
@@ -28,11 +28,11 @@ public class ProductService : IProductService
         return _mapper.Map<ProductDTO>(productEntity);
     }
 
-    public async Task AddProduct(ProductDTO productDTO)
+    public async Task AddProduct(ProductDTO productDto)
     {
-        var productEntity = _mapper.Map<Product>(productDTO);
+        var productEntity = _mapper.Map<Product>(productDto);
         await _productRepository.Create(productEntity);
-        productDTO.Id = productEntity.Id;
+        productDto.Id = productEntity.Id;
     }
 
     public async Task UpdateProduct(ProductDTO productDTO)

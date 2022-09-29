@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using WebShop.ProductApi.Models;
 
 namespace WebShop.ProductApi.DTOs;
@@ -28,6 +29,9 @@ public class ProductDTO
     [MinLength(3)]
     [MaxLength(255)]
     public string? ImageURL { get; set; }
+
+    [JsonIgnore]
     public Category? Category { get; set; }
+
     public int CategoryID { get; set; }
 }
